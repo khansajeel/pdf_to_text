@@ -3,6 +3,7 @@ from pdf2image import convert_from_path
 from paddleocr import PaddleOCR
 import sys
 import os
+ocr_obj = PaddleOCR(use_angle_cls=True, lang='en',det_algorithm="DB",rec_algorithm="SVTR_LCNet")
 
 def pdf_to_png(pdf_path):
     """
@@ -25,7 +26,6 @@ def pdf_to_png(pdf_path):
 
 
 def paddle_inference(im_path):
-    ocr_obj = PaddleOCR(use_angle_cls=True, lang='en',det_algorithm="DB",rec_algorithm="SVTR_LCNet")
     result = ocr_obj.ocr(im_path)
     return result
 
@@ -74,3 +74,4 @@ if __name__ == "__main__":
         out_path = os.path.join(output_dir, f'result_{i + 1}.txt')
         dump_result_to_file(ext_text, out_path)
         result.append(ext_text)
+    print("Processing Done!!!!!!!!!!")
